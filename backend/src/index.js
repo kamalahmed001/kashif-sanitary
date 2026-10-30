@@ -76,23 +76,21 @@ app.use((err, req, res, next) => {
   });
 });
 
-async function startServer() {
+// Start server and bind port immediately for cloud hosts (Render, Heroku, etc.)
+app.listen(PORT, '0.0.0.0', async () => {
+  console.log(`\n======================================================`);
+  console.log(`  Kashif Sanitary Supplies API is running!`);
+  console.log(`  Port: ${PORT}`);
+  console.log(`  Health Check: http://localhost:${PORT}/api/health`);
+  console.log(`======================================================\n`);
+
   try {
-    console.log('[Server] Connecting to database and running migrations...');
+    console.log('[Server] Connecting to database and running schema verification...');
     await initSchema();
     await seedDefaults();
-
-    app.listen(PORT, '0.0.0.0', () => {
-      console.log(`\n======================================================`);
-      console.log(`  Kashif Sanitary Supplies API is running!`);
-      console.log(`  Port: ${PORT}`);
-      console.log(`  Health Check: http://localhost:${PORT}/api/health`);
-      console.log(`======================================================\n`);
-    });
+    console.log('[Server] Database schema and defaults verified successfully.');
   } catch (error) {
-    console.error('[Startup Error]:', error);
-    process.exit(1);
+    console.error('[Database Initialization Warning]:', error.message);
+    console.error('Make sure TURSO_DATABASE_URL and TURSO_AUTH_TOKEN environment variables are configured.');
   }
-}
-
-startServer();
+});

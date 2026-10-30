@@ -1,0 +1,13 @@
+{
+  "name": "kashif-sanitary-supplies",
+  "version": "1.0.0",
+  "description": "Kashif Sanitary Supplies - Full Stack Application",
+  "private": true,
+  "scripts": {
+    "start": "cd backend && npm install && node src/index.js",
+    "build": "cd backend && npm install",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "backend": "cd backend && npm run dev",
+    "frontend": "cd frontend && npm run dev"
+  }
+}
