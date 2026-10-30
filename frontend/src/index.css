@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html[dir="rtl"] {
+    font-family: 'Noto Sans Arabic', 'Noto Nastaliq Urdu', Tahoma, Arial, sans-serif;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900;
+  }
+}
+
+.urdu-text {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', Tahoma, sans-serif;
+  line-height: 1.9;
+}
+
+/* Print styles for order slips and purchasing procurement sheets */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-area, .printable-area * {
+    visibility: visible;
+  }
+  .printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: white;
+    color: black;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

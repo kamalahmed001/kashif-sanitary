@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: kashif-sanitary-backend
+    env: node
+    plan: free
+    region: frankfurt # or singapore / oregon
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TURSO_DATABASE_URL
+        sync: false # Set in Render Dashboard: libsql://your-database.turso.io
+      - key: TURSO_AUTH_TOKEN
+        sync: false # Set in Render Dashboard
+      - key: JWT_SECRET
+        generateValue: true # Render automatically generates a secure random secret!
+      - key: CORS_ORIGIN
+        sync: false # Set to your Netlify URL e.g. https://kashif-sanitary.netlify.app
